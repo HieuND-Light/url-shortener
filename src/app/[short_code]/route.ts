@@ -21,6 +21,10 @@ export async function GET(request: Request) {
   const segments = url.pathname.split('/').filter(Boolean);
   const shortCode = segments.pop();
 
+  if (shortCode === 'home') {
+    return NextResponse.next();
+  }
+
   if (!AppDataSource.isInitialized) {
     await AppDataSource.initialize();
   }
