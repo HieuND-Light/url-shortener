@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    //for typeorm
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    //default
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
