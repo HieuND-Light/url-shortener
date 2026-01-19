@@ -5,16 +5,16 @@ import { Url } from "@/app/entities/Url";
 // Define the connection options, reading from environment variables
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: process.env.DATABASE_HOST,
-  port: parseInt(process.env.DATABASE_PORT || '5432', 10),
-  username: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
+  url: process.env.DATABASE_URL,
+  
   synchronize: process.env.NODE_ENV !== 'production',
   logging: ["error", "warn"],
   entities: [Url],
   subscribers: [],
   migrations: [],
+  ssl: {
+    rejectUnauthorized: false, // Set to true if you have a valid CA certificate
+  },
 });
 
 export const connectDB = async () => {
