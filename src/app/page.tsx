@@ -38,12 +38,16 @@ export default function Home() {
     setCopySuccess(false);
 
     try {
+      if (!longUrl || longUrl.trim() === '') {
+          throw new Error('URL dài không được để trống.');
+        }
       let formattedLongUrl = longUrl;
       if (!longUrl.startsWith('http://') && !longUrl.startsWith('https://')) {
         formattedLongUrl = `https://${longUrl}`;
       }
       const parsedUrl = new URL(formattedLongUrl);
-      if (!parsedUrl.hostname.includes('.')) {
+      const isNumeric = /^\d+(\.\d+)*$/.test(parsedUrl.hostname);
+      if (!parsedUrl.hostname.includes('.') || isNumeric) {
         throw new Error("URL không hợp lệ.");
       }
 
@@ -158,7 +162,6 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-red-400 p-4 ${inter.className}`}>
-      {/* <button className="absolute top-0 right-0 flex m-4 rounded-lg px-4 py-2 text-sm font-semibold text-white bg-red-600 hover:border-transparent hover:bg-white hover:text-red-600 active:bg-red-700 active:text-white">Log in</button> */}
       <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md space-y-6 transform transition-all duration-300 hover:scale-105">
 
         <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-6 drop-shadow-sm">{t.main_title}</h1>

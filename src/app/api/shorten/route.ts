@@ -85,6 +85,8 @@ export async function POST(request: Request){
     // Save the new link
     const newLink = UrlRepository.create({ long_url: longUrl, short_code: shortCode });
     await UrlRepository.save(newLink);
+    
+    //PostgresCollision error.code = '23505'
 
     const shortUrl = `${process.env.BASE_URL}/${newLink.short_code}`;
     const qrCodeDataUrl = await QRCode.toDataURL(shortUrl);

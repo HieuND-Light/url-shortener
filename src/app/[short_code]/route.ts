@@ -21,7 +21,7 @@ export async function GET(request: Request) {
   const segments = url.pathname.split('/').filter(Boolean);
   const shortCode = segments.pop();
 
-  if (shortCode === 'home') {
+  if (shortCode === 'home' || shortCode === 'admin') {
     return NextResponse.next();
   }
 
